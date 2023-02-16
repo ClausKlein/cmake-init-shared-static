@@ -1,13 +1,15 @@
+---
 name: Continuous Integration
 
 on:
   push:
     branches:
-    - master
+      - master
+      - develop
 
   pull_request:
     branches:
-    - master
+      - develop
 
 jobs:
   lint:
@@ -20,7 +22,7 @@ jobs:
       with: { python-version: "3.8" }
 
     - name: Install codespell
-      run: pip3 install codespell
+      run: pip3 install codespell clang ninja
 
     - name: Lint
       run: cmake -D FORMAT_COMMAND=clang-format-14 -P cmake/lint.cmake
@@ -34,7 +36,7 @@ jobs:
 
     runs-on: ubuntu-22.04
 
-    if: github.repository_owner == 'friendlyanon'
+    # if: github.repository_owner == 'friendlyanon'
 
     steps:
     - uses: actions/checkout@v4
@@ -98,8 +100,8 @@ jobs:
         type: [shared, static]
 
         include:
-        - { type: shared, shared: YES }
-        - { type: static, shared: NO }
+          - {type: shared, shared: YES}
+          - {type: static, shared: NO}
 
     runs-on: ${{ matrix.os }}
 
