@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.14...3.26)
 
 include(cmake/prelude.cmake)
 
@@ -18,6 +18,7 @@ include(cmake/variables.cmake)
 add_library(
     shared_shared
     source/shared.cpp
+    include/shared/shared.hpp
 )
 add_library(shared::shared ALIAS shared_shared)
 
