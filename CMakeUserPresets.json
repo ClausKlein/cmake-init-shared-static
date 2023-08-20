@@ -9,18 +9,17 @@
     {
       "name": "dev",
       "displayName": "developer Ninja build on macos with Coverage",
-      "inherits": ["ci-macos", "coverage-darwin"],
-      "generator": "Ninja",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Coverage"
-      }
+      "description": "NOTE: coverage must be the first to overwrite Release build! CK",
+      "inherits": ["coverage-darwin", "ci-macos"],
+      "generator": "Ninja"
     }
   ],
   "buildPresets": [
     {
       "name": "dev",
       "configurePreset": "dev",
-      "configuration": "Coverage"
+      "configuration": "Coverage",
+      "targets": ["all", "spell-check", "format-check"]
     }
   ],
   "testPresets": [
