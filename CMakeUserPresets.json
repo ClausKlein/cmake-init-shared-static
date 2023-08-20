@@ -10,7 +10,7 @@
       "name": "dev",
       "displayName": "developer Ninja build on macos with Coverage",
       "description": "NOTE: coverage must be the first to overwrite Release build! CK",
-      "inherits": ["coverage-darwin", "ci-macos"],
+      "inherits": ["coverage-darwin", "ci-macos", "doxygen"],
       "generator": "Ninja"
     }
   ],
@@ -19,7 +19,7 @@
       "name": "dev",
       "configurePreset": "dev",
       "configuration": "Coverage",
-      "targets": ["all", "spell-check", "format-check"]
+      "targets": ["all", "test", "install", "spell-fix", "format-fix", "coverage", "docs"]
     }
   ],
   "testPresets": [

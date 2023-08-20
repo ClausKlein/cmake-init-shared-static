@@ -56,7 +56,7 @@ target_include_directories(
     "\$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/export>"
 )
 
-target_compile_features(shared_shared PUBLIC cxx_std_17)
+target_compile_features(shared_shared PUBLIC cxx_std_20)
 
 # ---- Install rules ----
 

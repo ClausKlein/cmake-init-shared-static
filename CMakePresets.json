@@ -38,6 +38,13 @@
       }
     },
     {
+      "name": "doxygen",
+      "hidden": true,
+      "cacheVariables": {
+        "BUILD_MCSS_DOCS": true
+      }
+    },
+    {
       "name": "cppcheck",
       "hidden": true,
       "cacheVariables": {
@@ -57,7 +64,7 @@
       "hidden": true,
       "cacheVariables": {
         "CMAKE_CXX_EXTENSIONS": "OFF",
-        "CMAKE_CXX_STANDARD": "17",
+        "CMAKE_CXX_STANDARD": "20",
         "CMAKE_CXX_STANDARD_REQUIRED": "ON"
       }
     },
