@@ -11,7 +11,14 @@
       "displayName": "developer Ninja build on macos with Coverage",
       "description": "NOTE: coverage must be the first to overwrite Release build! CK",
       "inherits": ["coverage-darwin", "ci-macos", "doxygen"],
-      "generator": "Ninja"
+      "generator": "Ninja",
+      "installDir": "${sourceDir}/stagedir",
+      "cacheVariables": {
+        "CMAKE_PREFIX_PATH": {
+          "type": "path",
+          "value": "${sourceDir}/stagedir"
+        }
+      }
     }
   ],
   "buildPresets": [
