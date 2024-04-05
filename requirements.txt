@@ -1,0 +1,7 @@
+ninja
+cmake
+gcovr
+ymallint
+jinja2
+Pygments
+codespell

@@ -8,9 +8,9 @@
   "configurePresets": [
     {
       "name": "dev",
-      "displayName": "developer Ninja build on macos with Coverage",
+      "displayName": "developer Ninja build on unix with Coverage",
       "description": "NOTE: coverage must be the first to overwrite Release build! CK",
-      "inherits": ["coverage-darwin", "ci-macos", "doxygen"],
+      "inherits": ["coverage-<hostSystemName>", "ci-<hostSystemName>", "doxygen"],
       "generator": "Ninja",
       "installDir": "${sourceDir}/stagedir",
       "cacheVariables": {
@@ -26,7 +26,7 @@
       "name": "dev",
       "configurePreset": "dev",
       "configuration": "Coverage",
-      "targets": ["all", "test", "install", "spell-fix", "format-fix", "coverage", "docs"]
+      "targets": ["all"]
     }
   ],
   "testPresets": [
@@ -38,7 +38,7 @@
         "outputOnFailure": true
       }
     }
-  ] ,
+  ],
   "workflowPresets": [
     {
       "name": "dev",

@@ -2,7 +2,7 @@
   "version": 3,
   "cmakeMinimumRequired": {
     "major": 3,
-    "minor": 14,
+    "minor": 21,
     "patch": 0
   },
   "configurePresets": [
@@ -121,7 +121,7 @@
       "hidden": true
     },
     {
-      "name": "coverage-linux",
+      "name": "coverage-Linux",
       "binaryDir": "${sourceDir}/build/coverage",
       "inherits": "ci-linux",
       "hidden": true,
@@ -134,7 +134,7 @@
       }
     },
     {
-      "name": "coverage-darwin",
+      "name": "coverage-Darwin",
       "binaryDir": "${sourceDir}/build/coverage",
       "inherits": "ci-darwin",
       "hidden": true,
@@ -148,7 +148,7 @@
     },
     {
       "name": "ci-coverage",
-      "inherits": ["coverage-linux", "dev-mode"],
+      "inherits": ["coverage-Linux", "dev-mode"],
       "cacheVariables": {
         "COVERAGE_HTML_COMMAND": ""
       }
@@ -168,12 +168,20 @@
       "hidden": true
     },
     {
-      "name": "ci-macos",
+      "name": "ci-Darwin",
       "inherits": ["ci-build", "ci-darwin", "dev-mode"]
     },
     {
-      "name": "ci-ubuntu",
+      "name": "ci-macos",
+      "inherits": "ci-Darwin"
+    },
+    {
+      "name": "ci-Linux",
       "inherits": ["ci-build", "ci-linux", "clang-tidy", "dev-mode"]
+    },
+    {
+      "name": "ci-ubuntu",
+      "inherits": "ci-Linux"
     },
     {
       "name": "ci-windows",
