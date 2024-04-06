@@ -5,3 +5,4 @@ ymallint
 jinja2
 Pygments
 codespell
+cmake-init
