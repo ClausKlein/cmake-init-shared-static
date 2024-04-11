@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.21...3.29)
+cmake_minimum_required(VERSION 3.25...3.29)
 
 include(cmake/prelude.cmake)
 
@@ -10,7 +10,6 @@ project(
   LANGUAGES CXX
 )
 
-# include(cmake/project-is-top-level.cmake)
 include(cmake/variables.cmake)
 
 # ---- Declare library ----
@@ -30,20 +29,16 @@ generate_export_header(
   pragma_suppress_c4251
 )
 
-if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.23.0")
-  # cmake-format: off
-  target_sources(
-    shared_shared PUBLIC
-      FILE_SET HEADERS
-      BASE_DIRS include
-        ${PROJECT_BINARY_DIR}/export
-      FILES include/shared/shared.hpp
-        ${PROJECT_BINARY_DIR}/export/shared/shared_export.hpp
-  )
-  # cmake-format: on
-else()
-  target_sources(shared_shared PUBLIC include/shared/shared.hpp)
-endif()
+# cmake-format: off
+target_sources(
+  shared_shared PUBLIC
+    FILE_SET HEADERS
+    BASE_DIRS include
+      ${PROJECT_BINARY_DIR}/export
+    FILES include/shared/shared.hpp
+      ${PROJECT_BINARY_DIR}/export/shared/shared_export.hpp
+)
+# cmake-format: on
 
 if(NOT BUILD_SHARED_LIBS)
   target_compile_definitions(shared_shared PUBLIC SHARED_STATIC_DEFINE)
@@ -58,18 +53,6 @@ set_target_properties(
              EXPORT_NAME shared
              OUTPUT_NAME shared
 )
-
-if(${CMAKE_VERSION} VERSION_LESS "3.23.0")
-  target_include_directories(
-    shared_shared ${warning_guard}
-    PUBLIC "\$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>"
-  )
-
-  target_include_directories(
-    shared_shared SYSTEM
-    PUBLIC "\$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/export>"
-  )
-endif()
 
 target_compile_features(shared_shared PUBLIC cxx_std_20)
 

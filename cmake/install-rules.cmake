@@ -12,19 +12,6 @@ include(GNUInstallDirs)
 # find_package(<package>) call for consumers to find this project
 set(package shared)
 
-if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.23.0")
-    # required in CMake 3.23 and more
-    set(FILE_SET_ARGS "FILE_SET" "HEADERS")
-else()
-    install(
-        DIRECTORY
-        include/
-        "${PROJECT_BINARY_DIR}/export/"
-        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
-        COMPONENT shared_Development
-    )
-endif()
-
 install(
     TARGETS shared_shared
     EXPORT sharedTargets
@@ -37,7 +24,7 @@ install(
     COMPONENT shared_Development
     INCLUDES #
     DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
-    ${FILE_SET_ARGS} # FILE_SET HEADERS
+    FILE_SET HEADERS
 )
 
 write_basic_package_version_file(
