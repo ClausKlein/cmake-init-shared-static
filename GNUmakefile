@@ -11,7 +11,7 @@ export hostSystemName=$(shell uname)
 all: .init coverage test
 
 coverage: .init
-	cmake --workflow --preset dev
+	cmake --workflow --preset user
 	gcovr .
 
 check: .init
@@ -22,7 +22,7 @@ check: .init
 	ninja -C build/coverage format-check
 
 test: .init
-	cmake --preset ci-${hostSystemName}
+	cmake --preset ci-${hostSystemName} --fresh
 	cmake --build build
 	cmake --install build --prefix $(CURDIR)/stagedir
 	cmake -G Ninja -B build/tests -S test -D CMAKE_PREFIX_PATH=$(CURDIR)/stagedir

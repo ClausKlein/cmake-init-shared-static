@@ -7,28 +7,20 @@
   },
   "configurePresets": [
     {
-      "name": "dev",
+      "name": "user",
       "displayName": "developer Ninja build on unix with Coverage",
       "description": "NOTE: coverage must be the first to overwrite Release build! CK",
       "inherits": [
-        "coverage-<hostSystemName>",
-        "ci-<hostSystemName>",
-        "doxygen"
+        "ci-coverage",
+        "ci-<hostSystemName>"
       ],
-      "generator": "Ninja",
-      "installDir": "${sourceDir}/stagedir",
-      "cacheVariables": {
-        "CMAKE_PREFIX_PATH": {
-          "type": "path",
-          "value": "${sourceDir}/stagedir"
-        }
-      }
+      "generator": "Ninja"
     }
   ],
   "buildPresets": [
     {
-      "name": "dev",
-      "configurePreset": "dev",
+      "name": "user",
+      "configurePreset": "user",
       "configuration": "Coverage",
       "targets": [
         "all"
@@ -37,8 +29,8 @@
   ],
   "testPresets": [
     {
-      "name": "dev",
-      "configurePreset": "dev",
+      "name": "user",
+      "configurePreset": "user",
       "configuration": "Coverage",
       "output": {
         "outputOnFailure": true
@@ -47,19 +39,19 @@
   ],
   "workflowPresets": [
     {
-      "name": "dev",
+      "name": "user",
       "steps": [
         {
           "type": "configure",
-          "name": "dev"
+          "name": "user"
         },
         {
           "type": "build",
-          "name": "dev"
+          "name": "user"
         },
         {
           "type": "test",
-          "name": "dev"
+          "name": "user"
         }
       ]
     }
