@@ -1,0 +1,80 @@
+{
+  "version": 4,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 23,
+    "patch": 0
+  },
+  "include": [
+    "CMakeGenericPresets.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "flags-appleclang",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_CXX_FLAGS": "-fstack-protector-strong -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wcast-qual -Wformat=2 -Wundef -Werror=float-equal -Wshadow -Wcast-align -Wunused -Wnull-dereference -Wdouble-promotion -Wimplicit-fallthrough -Wextra-semi -Woverloaded-virtual -Wnon-virtual-dtor -Wold-style-cast"
+      }
+    },
+    {
+      "name": "ci-darwin",
+      "generator": "Unix Makefiles",
+      "hidden": true,
+      "inherits": [
+        "flags-appleclang",
+        "ci-std"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "coverage-darwin",
+      "binaryDir": "${sourceDir}/build/coverage",
+      "inherits": "ci-darwin",
+      "hidden": true,
+      "cacheVariables": {
+        "ENABLE_COVERAGE": true,
+        "CMAKE_BUILD_TYPE": "Coverage",
+        "CMAKE_CXX_FLAGS_COVERAGE": "-Og -g --coverage",
+        "CMAKE_EXE_LINKER_FLAGS_COVERAGE": "--coverage",
+        "CMAKE_SHARED_LINKER_FLAGS_COVERAGE": "--coverage"
+      }
+    },
+    {
+      "name": "ci-coverage",
+      "inherits": [
+        "coverage-darwin",
+        "dev-mode"
+      ],
+      "cacheVariables": {
+        "COVERAGE_HTML_COMMAND": ""
+      }
+    },
+    {
+      "name": "ci-sanitize",
+      "binaryDir": "${sourceDir}/build/sanitize",
+      "inherits": [
+        "ci-darwin",
+        "dev-mode"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Sanitize",
+        "CMAKE_CXX_FLAGS_SANITIZE": "-U_FORTIFY_SOURCE -O2 -g -fsanitize=address,undefined -fno-omit-frame-pointer -fno-common"
+      }
+    },
+    {
+      "name": "ci-Darwin",
+      "inherits": [
+        "ci-build",
+        "ci-darwin",
+        "clang-tidy",
+        "dev-mode"
+      ]
+    },
+    {
+      "name": "ci-macos",
+      "inherits": "ci-Darwin"
+    }
+  ]
+}

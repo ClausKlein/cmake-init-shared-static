@@ -10,18 +10,18 @@ export hostSystemName=$(shell uname)
 .PHONY: all coverage check test clean distclean
 all: .init coverage test
 
-coverage:
+coverage: .init
 	cmake --workflow --preset dev
 	gcovr .
 
-check:
+check: .init
 	-iwyu_tool.py -p build/coverage source \
 		-- -Xiwyu --cxx17ns #XXX -Xiwyu --transitive_includes_only
 	run-clang-tidy -p build/coverage -checks='-*,misc-header-*,misc-include-*' source
 	ninja -C build/coverage format-check
 	ninja -C build/coverage format-check
 
-test:
+test: .init
 	cmake --preset ci-${hostSystemName}
 	cmake --build build
 	cmake --install build --prefix $(CURDIR)/stagedir
@@ -31,7 +31,9 @@ test:
 
 .init: requirements.txt .CMakeUserPresets.json
 	perl -p -e 's/<hostSystemName>/${hostSystemName}/g;' .CMakeUserPresets.json > CMakeUserPresets.json
-	-pip3 install --user --upgrade -r requirements.txt
+	check-jsonschema --schemafile /Users/clausklein/Downloads/cmake/Help/manual/presets/schema.json CMake*.json
+	pip3 install --upgrade -r requirements.txt
+	pip3 check
 	touch .init
 
 clean:

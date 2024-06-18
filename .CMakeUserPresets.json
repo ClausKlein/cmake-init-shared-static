@@ -1,8 +1,8 @@
 {
-  "version": 6,
+  "version": 9,
   "cmakeMinimumRequired": {
     "major": 3,
-    "minor": 25,
+    "minor": 30,
     "patch": 0
   },
   "configurePresets": [
@@ -10,7 +10,11 @@
       "name": "dev",
       "displayName": "developer Ninja build on unix with Coverage",
       "description": "NOTE: coverage must be the first to overwrite Release build! CK",
-      "inherits": ["coverage-<hostSystemName>", "ci-<hostSystemName>", "doxygen"],
+      "inherits": [
+        "coverage-<hostSystemName>",
+        "ci-<hostSystemName>",
+        "doxygen"
+      ],
       "generator": "Ninja",
       "installDir": "${sourceDir}/stagedir",
       "cacheVariables": {
@@ -26,7 +30,9 @@
       "name": "dev",
       "configurePreset": "dev",
       "configuration": "Coverage",
-      "targets": ["all"]
+      "targets": [
+        "all"
+      ]
     }
   ],
   "testPresets": [

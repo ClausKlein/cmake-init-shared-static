@@ -1,8 +1,9 @@
-ninja
-cmake
+# ninja
+# cmake
 gcovr
-ymallint
+yamllint
 jinja2
 Pygments
 codespell
 cmake-init
+check-jsonschema
