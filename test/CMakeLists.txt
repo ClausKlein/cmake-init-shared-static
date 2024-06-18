@@ -1,8 +1,7 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.25...3.29)
 
 project(sharedTests LANGUAGES CXX)
 
-include(../cmake/project-is-top-level.cmake)
 include(../cmake/folders.cmake)
 
 # ---- Dependencies ----

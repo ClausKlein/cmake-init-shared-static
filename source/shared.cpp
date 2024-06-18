@@ -1,5 +1,3 @@
-#include <string>
-
 #include "shared/shared.hpp"
 
 exported_class::exported_class()

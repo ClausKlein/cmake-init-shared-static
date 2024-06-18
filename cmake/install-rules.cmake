@@ -13,14 +13,6 @@ include(GNUInstallDirs)
 set(package shared)
 
 install(
-    DIRECTORY
-    include/
-    "${PROJECT_BINARY_DIR}/export/"
-    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
-    COMPONENT shared_Development
-)
-
-install(
     TARGETS shared_shared
     EXPORT sharedTargets
     RUNTIME #
@@ -32,6 +24,7 @@ install(
     COMPONENT shared_Development
     INCLUDES #
     DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+    FILE_SET HEADERS
 )
 
 write_basic_package_version_file(

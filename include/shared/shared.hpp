@@ -62,7 +62,7 @@ public:
   /**
    * @brief Returns a non-owning pointer to the string stored in this class
    */
-  auto name() const -> char const*;
+  [[nodiscard("PURE FUN")]] auto name() const -> const char*;
 
 private:
   SHARED_SUPPRESS_C4251

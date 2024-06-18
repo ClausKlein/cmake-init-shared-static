@@ -1,6 +1,8 @@
 include(cmake/folders.cmake)
 
-include(CTest)
+enable_testing()
+
+# XXX include(CTest)
 if(BUILD_TESTING)
   add_subdirectory(test)
 endif()
